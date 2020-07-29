@@ -65,7 +65,19 @@ async function viewEmployees(){
     console.table(employees);
     mainPrompts();
 };
-//viewDepartments and viewRoles are going to be identical
+async function viewDepartments(){
+    const departments = await db.findAllDepartments()
+    console.log("\n");
+    console.table(departments);
+    mainPrompts();
+};
+async function viewRoles(){
+    const roles = await db.findAllRoles()
+    console.log("\n");
+    console.table(roles);
+    mainPrompts();
+};
+
 
 async function addEmployee() {
     const roles = await db.findAllRoles();
