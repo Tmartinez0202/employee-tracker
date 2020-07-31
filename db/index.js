@@ -15,7 +15,17 @@ class DB {
     updateEmployeeRole(){
         return this.connection.query("UPDATE employee SET role_id = ? WHERE id = ?",[roleId, employeeId])
     }
+    createEmployee(employee){
+        return this.connection.query("INSERT INTO employee SET ?", employee)
+    }
 
+   createRole(role){
+        return this.connection.query("INSERT INTO role SET ?", role)
+    }
+    
+    createDepartment(department){
+        return this.connection.query("INSERT INTO department SET ?", department)
+    }
 
 }
 module.exports = new DB(connection);
