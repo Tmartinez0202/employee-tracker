@@ -119,6 +119,43 @@ async function addEmployee() {
     console.log("added employee to the database")
     mainPrompts();
 }
+
+async function addRole(){
+    const department = await db.findAllDepartments()
+    const departmentChoices = department.map(({id, name}) => ({
+        name: name,
+        value: id
+    }))
+    const role = await prompt([
+        {
+            name: "title",
+            message: "what new role would you like to add?"
+        },
+        {
+            name: "salary",
+            message: "How much does this role earn?"
+        },
+        {
+            name: "department_id",
+            message: "What department does this role belong to?",
+            type: "list",
+            choices: departmentChoices
+        },
+    ])
+    await db.createRole(role)
+    mainPrompts()
+}
+
+async function addDepartment(){
+    const department = await prompt([
+        {
+        name: "name",
+        message: "What is the name of the department?"
+    }
+    ])
+    await db.createDepartment(department)
+    mainPrompts() 
+}
 // addRoles and addDepartment will go here
 
 async function updateEmployeeRole(){
